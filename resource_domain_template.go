@@ -3,8 +3,7 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"strconv"
+	"regexp"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -87,7 +86,7 @@ func resourceDomainTemplate() *schema.Resource {
 	}
 }
 
-var slugRegex = `^[-a-zA-Z0-9_]+$`
+var slugRegex = regexp.MustCompile(`^[-a-zA-Z0-9_]+$`)
 
 func resourceDomainTemplateCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	client := m.(*Client)
