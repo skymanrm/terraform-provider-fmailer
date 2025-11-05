@@ -149,16 +149,32 @@ func resourceDomainTemplateRead(ctx context.Context, d *schema.ResourceData, m i
 		return diag.FromErr(err)
 	}
 
-	d.Set("uuid", domainTemplate.UUID)
-	d.Set("name", domainTemplate.Name)
-	d.Set("slug", domainTemplate.Slug)
-	d.Set("domain", domainTemplate.Domain)
-	d.Set("allow_copy", domainTemplate.AllowCopy)
-	d.Set("editable", domainTemplate.Editable)
-	d.Set("created_at", domainTemplate.CreatedAt.Format(time.RFC3339))
-	d.Set("updated_at", domainTemplate.UpdatedAt.Format(time.RFC3339))
+	if err := d.Set("uuid", domainTemplate.UUID); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("name", domainTemplate.Name); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("slug", domainTemplate.Slug); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("domain", domainTemplate.Domain); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("allow_copy", domainTemplate.AllowCopy); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("editable", domainTemplate.Editable); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("created_at", domainTemplate.CreatedAt.Format(time.RFC3339)); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("updated_at", domainTemplate.UpdatedAt.Format(time.RFC3339)); err != nil {
+		return diag.FromErr(err)
+	}
 
-	if domainTemplate.Langs != nil && len(domainTemplate.Langs) > 0 {
+	if len(domainTemplate.Langs) > 0 {
 		langs := make([]interface{}, len(domainTemplate.Langs))
 		for i, lang := range domainTemplate.Langs {
 			langs[i] = map[string]interface{}{
@@ -168,7 +184,9 @@ func resourceDomainTemplateRead(ctx context.Context, d *schema.ResourceData, m i
 				"default": lang.Default,
 			}
 		}
-		d.Set("langs", langs)
+		if err := d.Set("langs", langs); err != nil {
+			return diag.FromErr(err)
+		}
 	}
 
 	return diags
@@ -300,16 +318,32 @@ func dataSourceDomainTemplateRead(ctx context.Context, d *schema.ResourceData, m
 	}
 
 	d.SetId(domainTemplate.UUID)
-	d.Set("uuid", domainTemplate.UUID)
-	d.Set("name", domainTemplate.Name)
-	d.Set("slug", domainTemplate.Slug)
-	d.Set("domain", domainTemplate.Domain)
-	d.Set("allow_copy", domainTemplate.AllowCopy)
-	d.Set("editable", domainTemplate.Editable)
-	d.Set("created_at", domainTemplate.CreatedAt.Format(time.RFC3339))
-	d.Set("updated_at", domainTemplate.UpdatedAt.Format(time.RFC3339))
+	if err := d.Set("uuid", domainTemplate.UUID); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("name", domainTemplate.Name); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("slug", domainTemplate.Slug); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("domain", domainTemplate.Domain); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("allow_copy", domainTemplate.AllowCopy); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("editable", domainTemplate.Editable); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("created_at", domainTemplate.CreatedAt.Format(time.RFC3339)); err != nil {
+		return diag.FromErr(err)
+	}
+	if err := d.Set("updated_at", domainTemplate.UpdatedAt.Format(time.RFC3339)); err != nil {
+		return diag.FromErr(err)
+	}
 
-	if domainTemplate.Langs != nil && len(domainTemplate.Langs) > 0 {
+	if len(domainTemplate.Langs) > 0 {
 		langs := make([]interface{}, len(domainTemplate.Langs))
 		for i, lang := range domainTemplate.Langs {
 			langs[i] = map[string]interface{}{
@@ -319,7 +353,9 @@ func dataSourceDomainTemplateRead(ctx context.Context, d *schema.ResourceData, m
 				"default": lang.Default,
 			}
 		}
-		d.Set("langs", langs)
+		if err := d.Set("langs", langs); err != nil {
+			return diag.FromErr(err)
+		}
 	}
 
 	return diags
