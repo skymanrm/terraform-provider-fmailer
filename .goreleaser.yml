@@ -42,5 +42,5 @@ signs:
       - "${artifact}"
 release:
   github:
-    owner: yourusername
+    owner: skymanrm
     name: terraform-provider-fmailer
